@@ -9,9 +9,9 @@ def solution_two(array)
     sum += value
 
     if value < min[:value]
-      min = { :index => index, :value => value } 
+      min[:index], min[:value] = index, value
     elsif value > max[:value]
-      max = { :index => index, :value => value }
+      max[:index], max[:value] = index, value
     end
   end
 
@@ -23,21 +23,6 @@ def solution_two(array)
   extreme = min[:deviation] >= max[:deviation] ? min : max
 
   extreme[:index]
-end
-
-class ArrayElement
-  
-  attr_reader :index
-  attr_reader :value
-
-  def initialize(index, value)
-    @index, @value = index, value
-  end
-
-  def deviation_from(average)
-    (@value - average).abs
-  end
-
 end
 
 ############

@@ -7,8 +7,12 @@ def solution_two(array)
 
   array.each_with_index do |value, index|
     sum += value
-    min = { :index => index, :value => value } if value < min[:value]
-    max = { :index => index, :value => value } if value > max[:value]
+
+    if value < min[:value]
+      min = { :index => index, :value => value } 
+    elsif value > max[:value]
+      max = { :index => index, :value => value }
+    end
   end
 
   array_average = sum.to_f / array.length
@@ -19,6 +23,21 @@ def solution_two(array)
   extreme = min[:deviation] >= max[:deviation] ? min : max
 
   extreme[:index]
+end
+
+class ArrayElement
+  
+  attr_reader :index
+  attr_reader :value
+
+  def initialize(index, value)
+    @index, @value = index, value
+  end
+
+  def deviation_from(average)
+    (@value - average).abs
+  end
+
 end
 
 ############
